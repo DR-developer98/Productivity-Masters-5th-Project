@@ -6,6 +6,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
+# ↓↓↓ CREDIT: Django Rest Framework module - Code Institute ↓↓↓
 class ProfileList(APIView):
     """
     List all profiles
@@ -13,13 +14,11 @@ class ProfileList(APIView):
     """
     def get(self, request):
         profiles = Profile.objects.all()
-        # ↓↓↓ CREDIT: Django Rest Framework module - Code Institute ↓↓↓
         serializer = ProfileSerializer(
             profiles, many=True, context={'request': request}
         )
         return Response(serializer.data)
-        # ↑↑↑ CREDIT: Django Rest Framework module - Code Institute ↑↑↑
-
+        
 
 class ProfileDetail(APIView):
     """
