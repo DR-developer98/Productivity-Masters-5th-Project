@@ -1,5 +1,4 @@
 from django.http import Http404
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,7 +14,9 @@ class ProfileList(APIView):
     def get(self, request):
         profiles = Profile.objects.all()
         # ↓↓↓ CREDIT: Django Rest Framework module - Code Institute ↓↓↓
-        serializer = ProfileSerializer(profiles, many=True)
+        serializer = ProfileSerializer(
+            profiles, many=True, context={'request': request}
+        )
         return Response(serializer.data)
         # ↑↑↑ CREDIT: Django Rest Framework module - Code Institute ↑↑↑
 
