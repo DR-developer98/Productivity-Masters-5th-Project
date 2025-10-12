@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Category
 from .serializers import CategorySerializer
 
@@ -17,7 +18,7 @@ class CategoryList(APIView):
 
     def get(self, request):
         categories = Category.objects.filter(owner=request.user)
-        serializer = CategorySerializer(categories, many=True)
+        serializer = CategorySerializer(categories, many=True, context={'request': request})
         return Response(serializer.data)
     
     def post(self, request):
@@ -33,7 +34,7 @@ class CategoryDetail(APIView):
     Retrieve, update or delete a single category owned by the user
     """
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     def get_object(self, pk):
         try:
             category = Category.objects.get(pk=pk, owner=self.request.user)
@@ -43,12 +44,12 @@ class CategoryDetail(APIView):
         
     def get(self, request, pk):
         category = self.get_object(pk)
-        serializer = CategorySerializer(category)
+        serializer = CategorySerializer(category, context={'request': request})
         return Response(serializer.data)
     
     def put(self, request, pk):
         category = self.get_object(pk)
-        serializer = CategorySerializer(category, data=request.data)
+        serializer = CategorySerializer(category, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(owner=request.user)  
             return Response(serializer.data)
