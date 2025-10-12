@@ -28,3 +28,33 @@ class CategoryList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class CategoryDetail(APIView):
+    """
+    Retrieve, update or delete a single category owned by the user
+    """
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+    def get_object(self, pk):
+        try:
+            category = Category.objects.get(pk=pk, owner=self.request.user)
+            return category
+        except Category.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, pk):
+        category = self.get_object(pk)
+        serializer = CategorySerializer(category)
+        return Response(serializer.data)
+    
+    def put(self, request, pk):
+        category = self.get_object(pk)
+        serializer = CategorySerializer(category, data=request.data)
+        if serializer.is_valid():
+            serializer.save(owner=request.user)  
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk):
+        category = self.get_object(pk)
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
