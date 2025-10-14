@@ -49,7 +49,7 @@
 
 ## Credits
 
-* For the profile model, views and serializer I've referenced the Django Rest Framework module of the course;
+* For the profile model, views and serializer I've referenced Code Institute's Django Rest Framework module;
 * Stackoverflow
 
 ### Content

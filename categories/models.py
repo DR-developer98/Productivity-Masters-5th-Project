@@ -16,4 +16,4 @@ class Category(models.Model):
 
     def __str__(self):
         # ↓↓↓ CREDIT: Microsoft Copilot ↓↓↓
-        return f"{self.name} ({self.owner.profile.username})"
+        return f"{self.name} ({self.owner.username})"

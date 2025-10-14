@@ -11,7 +11,8 @@ from .serializers import CategorySerializer
 class CategoryList(APIView):
     """
     Return all categories the current user 
-    has created and allow creation of new categories
+    has created and allow for full CRUD 
+    functionalities on the category records
     """
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
