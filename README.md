@@ -41,6 +41,9 @@
 
 ## Implementation of the EPICS/User Stories
 
+### Categories
+<p>When creating a new task, the user may decide not to assign a category to the new item.</p>
+
 ## Testing
 
 <p>For the testing part, including fixed bugs, please refer to <a href="./TESTING.md">TESTING.md</a></p>
