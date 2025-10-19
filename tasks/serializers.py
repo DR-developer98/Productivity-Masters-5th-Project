@@ -24,7 +24,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_is_overdue(self, obj):
         return obj.is_overdue()
-        
+
     # ↓↓↓ CREDIT: Microsoft Copilot ↓↓↓
     # Ensures each user can only see their own categories, 
     # when creating a task, instead of all categories in the 
@@ -36,7 +36,6 @@ class TaskSerializer(serializers.ModelSerializer):
             self.fields['category'].queryset = Category.objects.filter(owner=request.user)
     # ↑↑↑ CREDIT: Microsoft Copilot ↑↑↑
 
-    
     class Meta:
         model = Task
         fields = [

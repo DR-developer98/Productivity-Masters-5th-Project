@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Reminder
+from tasks.models import Task
 
 
 class ReminderSerializer(serializers.ModelSerializer):
@@ -9,6 +10,13 @@ class ReminderSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context.get('request')
         return request and request.user == obj.owner
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            self.fields['task'].queryset = Task.objects.filter(
+                owners=request.user)
 
     # ↓↓↓ CREDIT: Django documentations > Django utils ↓↓↓
     def validate_remind_at(self, value):
@@ -34,3 +42,4 @@ class ReminderSerializer(serializers.ModelSerializer):
             'updated_at',
             'is_owner',
         ]
+        read_only_fields = ['owner']
