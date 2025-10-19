@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Profile
 
+
 # ↓↓↓ CREDIT: Django Rest Framework CI module ↓↓↓
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

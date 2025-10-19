@@ -27,4 +27,5 @@ class Reminder(models.Model):
         unique_together = ('task', 'owner', 'remind_at')
 
     def __str__(self):
-        return f"Reminder for {self.owner.username} on task '{self.task.title}'"
+        return f"Reminder for {self.owner.username} on \
+            task '{self.task.title}'"

@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('categories.urls')),
     path('', include('tasks.urls')),
     path('', include('attachments.urls')),
+    path('', include('reminders.urls')),
 ]
