@@ -38,7 +38,7 @@ class AttachmentList(APIView):
 
 class AttachmentDetail(APIView):
     """
-    Retrieve or delete a single attachment
+    Retrieve, change or delete a single attachment
     """
     serializer_class = AttachmentSerializer
     permission_classes = [IsAuthenticated, IsTaskOwner]
