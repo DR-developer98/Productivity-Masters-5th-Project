@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'attachments',
     'categories',
     'profiles',
+    'reminders',
     'tasks',
     'rest_framework',
 ]
