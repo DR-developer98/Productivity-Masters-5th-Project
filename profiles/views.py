@@ -14,14 +14,11 @@ class ProfileList(generics.ListAPIView):
     serializer_class = ProfileSerializer
 
 
-class ProfileDetail(generics.ListAPIView):
+class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     Returns one single profile based on its id
     Handles inexistance of a profile
     """
-    serializer_class = ProfileSerializer
-    permission_classes = [IsOwnerOrReadOnly]
-
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
