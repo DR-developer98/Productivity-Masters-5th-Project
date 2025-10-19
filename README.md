@@ -50,12 +50,36 @@
 
 ## Deployment
 
+## Debugging
+
+* While building the attachments app, upon trying to open a previously uploaded pdf file, I would get an error from 
+Cloudinary, stating that it was impossible to open a pdf file. This was solved by doing the following:
+<ol>
+    <li>adding the folling code in settings.py:</li>
+    <ul>
+        <li> use_filename=True ensures that Cloudinary uses the original filename;</li>
+        <li> unique_filename=False prevents Cloudinary from adding the randomly generated suffix;
+        <img src="../images_for_README/cloudinary_settings_file_upload.PNG">
+        </li>
+    </ul>
+    <li>adding the following code to the attachments>serializers.py:</li>
+    <ul>
+        <li>this establishes the allowed file extensions;</li>
+        <li>checks whether the uploaded file has one of the allowed extensions;</li>
+        <li>returns the file name if it has passed the validation system;</li>
+        <li>returns this error message: _"Only PDF, TXT, DOC, and DOCX files are allowed."_ if the extension is not allowed.
+        <img src="../images_for_README/attachment_serializer_file_validation.PNG"></li>
+    </ul>
+    <li>changing the security settings in my Cloudinary account:  
+    <img src="../images_for_README/security_settings_cloudinary.PNG"></li>
+</ol>
+
 ## Credits
 
-* For the profile model, views and serializer I've referenced Code Institute's Django Rest Framework module;
-* Stackoverflow
-
 ### Content
+
+* For the profile model, views and serializer I've referenced Code Institute's Django Rest Framework module;
+* Stackoverflow:
 
 ### Used technologies and media
 

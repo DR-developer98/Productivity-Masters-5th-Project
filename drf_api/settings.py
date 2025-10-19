@@ -14,10 +14,17 @@ from pathlib import Path
 import os
 
 if os.path.exists('env.py'):
-	import env
-	
-CLOUDINARY_STORAGE = {
-	'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
+    import env
+
+CLOUDINARY_STORAGE = CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
+    # Allows uploading files that aren't images without leading to conflicts
+    # with the image-field in the profile model.
+    # ↓↓↓ CREDIT: Microsoft copilot ↓↓↓
+    'OPTIONS': {
+        'use_filename': True,
+        'unique_filename': False,
+    }
 }
 
 MEDIA_URL = '/media/'
@@ -32,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6tvl4ob3)vmp%rtxrvio*32$0xw(r88l^akt#3rbq_(fjk&re6'
+SECRET_KEY = 'django-insecure-6tvl4ob3)vmp%rtxrvio*32$0xwr88l^akt#3rbq_(fjk&re6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,11 +56,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'attachments',
-	'categories',
-	'profiles',
-	'tasks',
-	'rest_framework',
+    'attachments',
+    'categories',
+    'profiles',
+    'tasks',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +110,8 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',

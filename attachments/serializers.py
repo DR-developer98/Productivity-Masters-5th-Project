@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Attachment
 from tasks.models import Task
+import os
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
@@ -17,6 +18,17 @@ class AttachmentSerializer(serializers.ModelSerializer):
         if request and hasattr(request, 'user'):
             self.fields['task'].queryset = Task.objects.filter(
                 owners=request.user)
+
+    # ↓↓↓ CREDIT: Microsoft Copilot + Moments (Code Institute) ↓↓↓
+    def validate_file(self, value):
+        ext = os.path.splitext(value.name)[1].lower()
+        allowed_exts = ['.pdf', '.txt', '.doc', '.docx']
+        if ext not in allowed_exts:
+            raise serializers.ValidationError(
+                "Only PDF, TXT, DOC, and DOCX files are allowed."
+                )
+        return value
+    # ↑↑↑ CREDIT: Microsoft Copilot + Moments (Code Institute) ↑↑↑
 
     class Meta:
         model = Attachment
