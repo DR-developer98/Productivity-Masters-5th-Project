@@ -1,64 +1,33 @@
-from django.http import Http404
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Task
 from .serializers import TaskSerializer
 
 
-class TaskList(APIView):
+class TaskList(generics.ListCreateAPIView):
     """
-    Return all tasks the current user 
-    has created and allow for full CRUD 
-    functionalities on the tasks records
+    List all tasks assigned to the current user.
+    Allow creating new tasks and automatically assign the user as one
+    of the owners.
     """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
-    def get(self, request):
-        tasks = Task.objects.filter(owners=request.user)
-        serializer = TaskSerializer(tasks, many=True, context={'request': request})
-        return Response(serializer.data)
-    
-    def post(self, request):
-        serializer = TaskSerializer(data=request.data)
-        if serializer.is_valid():
-            # ↓↓↓ CREDIT: Microsoft Copilot ↓↓↓
-            task = serializer.save()
-            task.owners.add(request.user) 
-            # ↑↑↑ CREDIT: Microsoft Copilot ↑↑↑
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
-class TaskDetail(APIView):
+    def get_queryset(self):
+        return Task.objects.filter(owners=self.request.user)
+
+    def perform_create(self, serializer):
+        task = serializer.save()
+        task.owners.add(self.request.user)
+
+
+class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve, update or delete a single task item owned by the user
+    Retrieve, update or delete a single task if the user is one of the owners.
     """
     serializer_class = TaskSerializer
-    permission_classes = [IsOwnerOrReadOnly]
-    def get_object(self, pk):
-        try:
-            task = Task.objects.get(pk=pk, owners=self.request.user)
-            return task
-        except Task.DoesNotExist:
-            raise Http404
-        
-    def get(self, request, pk):
-        task = self.get_object(pk)
-        serializer = TaskSerializer(task, context={'request': request})
-        return Response(serializer.data)
-    
-    def put(self, request, pk):
-        task = self.get_object(pk)
-        serializer = TaskSerializer(task, data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save(owner=request.user)  
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete(self, request, pk):
-        task = self.get_object(pk)
-        task.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return Task.objects.filter(owners=self.request.user)
