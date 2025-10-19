@@ -22,7 +22,7 @@ class Task(models.Model):
     ]
 
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length = 255, blank=True)
+    description = models.TextField(max_length=255, blank=True)
     due_date = models.DateTimeField(null=True, blank=True)
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default='open')
