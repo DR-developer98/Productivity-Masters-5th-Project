@@ -5,5 +5,5 @@ from rest_framework.response import Response
 @api_view()
 def root_route(request):
     return Response({
-        "message": "Welcome to the drf api for the Productivity Masters Project!"
+        "message": "Welcome to the Productivity Masters drf api!"
     })
