@@ -67,7 +67,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'productivity-masters.herokuapp.com',
+    'productivity-masters-8d3ed210249c.herokuapp.com',
     ]
 
 
