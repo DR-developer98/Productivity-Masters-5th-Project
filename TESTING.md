@@ -46,9 +46,9 @@
 <td>-</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>Add "/profiles" to the root route url</td>
+<td>The user is forwarded to the Profile List view, where a list of all the users can be seen. The key "is_owner" on the JSON-object for the user "Oskar" is set to "true". In all the others, it is set to "false"</td>
+<td>Pass</td>
 </tr>
 <tr>
 <td></td>

@@ -42,4 +42,4 @@ class ReminderSerializer(serializers.ModelSerializer):
             'updated_at',
             'is_owner',
         ]
-        read_only_fields = ['owner']
+        read_only_fields = ['owner', 'is_sent']
