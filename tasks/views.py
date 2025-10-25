@@ -1,4 +1,5 @@
-from rest_framework import generics
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Task
@@ -13,6 +14,18 @@ class TaskList(generics.ListCreateAPIView):
     """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    search_fields = (
+        'owners__username',
+        'title',
+        'description',
+        'due_date',
+        'category__name',
+    )
 
     def get_queryset(self):
         return Task.objects.filter(owners=self.request.user)

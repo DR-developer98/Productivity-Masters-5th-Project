@@ -8,7 +8,8 @@ from .serializers import ReminderSerializer
 class ReminderList(generics.ListCreateAPIView):
     """
     List all reminders created by the current user.
-    Allow creating new reminders, automatically assigning the logged-in user as owner.
+    Allow creating new reminders, automatically assigning the logged-in user
+    as owner.
     """
     serializer_class = ReminderSerializer
     permission_classes = [IsAuthenticated]
@@ -24,7 +25,8 @@ class ReminderDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a single reminder instance.
     Access is only allowed if the user is the owner of the reminder.
-    If the reminder is linked to a task, the user must be one of the task's owners.
+    If the reminder is linked to a task, the user must be one of the
+    task's owners.
     """
     serializer_class = ReminderSerializer
     permission_classes = [IsAuthenticated]
