@@ -1,0 +1,12 @@
+.Btn {
+    color: rgb(3, 3, 71);
+    background-color: white;
+    border: 1px solid rgb(3, 3, 71);
+    align-self: center;
+    width: 100%;
+}
+
+.Btn:hover {
+    color:white;
+    background-color: rgb(3, 3, 71);
+}
