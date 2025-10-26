@@ -5,6 +5,10 @@
 }
 
 /* ↓↓↓ CREDIT: Moments - Code Institute Project ↓↓↓*/
+.Main {
+    padding-top: 100px;
+}
+
 * {
   box-sizing: border-box;
 }
