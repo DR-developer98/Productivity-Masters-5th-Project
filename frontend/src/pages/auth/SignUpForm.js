@@ -7,6 +7,7 @@ import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const SignUpForm = () => {
+
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
