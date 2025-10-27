@@ -27,7 +27,7 @@ const NavBar = () => {
             <NavLink
               className={styles.NavLink}
               activeClassName={styles.Active}
-              to="/mycategories "
+              to="/mycategories"
             >
               <i className="fas fa-th-list"></i>My categories
             </NavLink>

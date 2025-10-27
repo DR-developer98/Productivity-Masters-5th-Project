@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const SignInForm = () => {
@@ -13,6 +13,8 @@ const SignInForm = () => {
   });
 
   const { username, password } = signInData;
+
+  const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
@@ -29,6 +31,7 @@ const SignInForm = () => {
       await axios.post("/dj-rest-auth/login/", signInData);
       history.push("/");
     } catch (err) {
+      setErrors(err.response?.data);
     }
   };
 
@@ -49,6 +52,11 @@ const SignInForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            {errors.username?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
 
             <Form.Group controlId="password" className="mb-4">
               <Form.Label className="d-none">Password</Form.Label>
@@ -61,14 +69,23 @@ const SignInForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            {errors.password?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
 
             <Button className={btnStyles.Btn} type="submit">
               Sign in
             </Button>
-
+            {errors.non_field_errors?.map((message, idx) => (
+              <Alert key={idx} variant="warning" className="mt-3">
+                {message}
+              </Alert>
+            ))}
           </Form>
           <Container className={`mt-3 ${appStyles.Content}`}>
-            <Link class={styles.Link} to="/signup">
+            <Link className={styles.Link} to="/signup">
               Haven't registered yet? <span>Sign up</span>
             </Link>
           </Container>
@@ -76,6 +93,6 @@ const SignInForm = () => {
       </Row>
     </Container>
   );
-}
+};
 
-export default SignInForm
+export default SignInForm;
