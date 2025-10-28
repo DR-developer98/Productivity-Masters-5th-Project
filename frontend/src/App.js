@@ -12,7 +12,8 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <h1>My tasks</h1>} />
+          <Route exact path="/" render={() => <h1>Home</h1>}/>
+          <Route exact path="/mytasks" render={() => <h1>My tasks</h1>} />
           <Route
             exact
             path="/mycategories"
