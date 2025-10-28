@@ -1,4 +1,4 @@
-[logo]
+<img src="../images_for_README/logo.png" style="width: 25%">
 
 # Productivity Masters
 <p>Description of the application and its objectives</p>
@@ -44,6 +44,12 @@
 ### Categories
 <p>When creating a new task, the user may decide not to assign a category to the new item.</p>
 
+### Future implementations
+In the future, one could decide to implement a community feature into this app, with the possibility to share one's completed tasks or tasks one is currently working on. 
+The profile feature, with room for an image and a bio (to specify one's goals and motives for using this application) would be a sensible addition to that.
+The reminders feature could be tweaked in such a way, that the reminders pop up on the screen X days/hours/minutes before the due date of a certain task. For that one could think of using modals.
+For the "My tasks" page, a possible implementation could be allowing the user to change a task status (open, in progress, completed, etc..) by dragging the item to the corresponding column. 
+
 ## Testing
 
 <p>For the testing part, including fixed bugs, please refer to <a href="./TESTING.md">TESTING.md</a></p>
@@ -59,19 +65,16 @@ Cloudinary, stating that it was impossible to open a pdf file. This was solved b
     <ul>
         <li> use_filename=True ensures that Cloudinary uses the original filename;</li>
         <li> unique_filename=False prevents Cloudinary from adding the randomly generated suffix;
-        <img src="../images_for_README/cloudinary_settings_file_upload.PNG">
-        </li>
-    </ul>
-    <li>adding the following code to the attachments>serializers.py:</li>
-    <ul>
+        <img src="../images_for_README/cloudinary_settings_file_upload.PNG"></li>
+        <li>adding the following code to the attachments>serializers.py:</li>
         <li>this establishes the allowed file extensions;</li>
         <li>checks whether the uploaded file has one of the allowed extensions;</li>
         <li>returns the file name if it has passed the validation system;</li>
         <li>returns this error message: _"Only PDF, TXT, DOC, and DOCX files are allowed."_ if the extension is not allowed.
         <img src="../images_for_README/attachment_serializer_file_validation.PNG"></li>
     </ul>
-    <li>changing the security settings in my Cloudinary account:  
-    <img src="../images_for_README/security_settings_cloudinary.PNG"></li>
+    <li>changing the security settings in my Cloudinary account:</li>
+    <img src="../images_for_README/security_settings_cloudinary.PNG">
 </ol>
 
 ## Credits
