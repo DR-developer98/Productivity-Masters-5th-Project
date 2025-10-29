@@ -1,6 +1,6 @@
 .NavBar {
     background-color: white;
-    border: 1px solid rgb(3, 3, 71);
+    border: 1px solid rgb(3, 24, 50);
 }
 
 /* ↓↓↓ CREDIT: Code Institute Moments project ↓↓↓*/
@@ -9,6 +9,6 @@
 }
 
 .Active i {
-    color: rgb(3, 3, 71);
+    color: rgb(3, 24, 50);
 }
 /* ↑↑↑ CREDIT: Code Institute Moments project ↑↑↑*/

@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import styles from '../styles/MyTask.module.css';
 
 const MyTasks = () => {
   return (
-    <div>This page will display all current tasks</div>
+    <Container className={styles.Container}>
+        <h1 className="text-center">My tasks</h1>
+      <Row>
+        <Col className={styles.Column}><h3 className={styles.Header}>To do</h3></Col>
+        <Col className={styles.Column}><h3 className={styles.Header}>In progress</h3></Col>
+        <Col className={styles.Column}><h3 className={styles.Header}>Complete</h3></Col>
+        <Col className={styles.Column}><h3 className={styles.Header}>Overdue</h3></Col>
+      </Row>
+    </Container>
   )
 }
 
