@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import styles from '../styles/MyTask.module.css';
+import styles from '../styles/MyTasks.module.css';
 
 const MyTasks = () => {
   return (

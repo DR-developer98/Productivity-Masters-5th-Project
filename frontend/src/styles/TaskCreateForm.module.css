@@ -1,0 +1,10 @@
+.CancelBtn {
+    color: rgb(180, 2, 2);
+    border: 1px solid rgb(180, 2, 2);
+}
+
+.CancelBtn:hover {
+    background-color: rgb(180, 2, 2);
+    border: 1px solid rgb(180, 2, 2);
+    color: white;
+}
