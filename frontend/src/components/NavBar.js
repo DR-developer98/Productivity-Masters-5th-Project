@@ -24,6 +24,9 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
+      <NavLink to="/createtask" className={styles.NavLink}>
+        <i className="fas fa-plus"></i>New Task
+      </NavLink>
       <NavLink
         exact
         className={styles.NavLink}

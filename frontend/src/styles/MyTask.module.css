@@ -11,8 +11,10 @@
 }
 
 .Column {
-    border: 1px dashed rgba(238, 156, 0);
+    border: 2px dashed rgba(238, 156, 0);
     border-radius: 2px;
     margin: auto 2.5px;
-    background-color: white
+    background-color: white;
+    padding: 1rem;
+    min-height: 300px;
 }

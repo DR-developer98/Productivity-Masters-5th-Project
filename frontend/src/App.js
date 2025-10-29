@@ -6,14 +6,17 @@ import "../src/api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import MyTasks from "./tasks/MyTasks";
+import TaskCreateForm from "./tasks/TaskCreateForm";
 
 function App() {
+
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <MyTasks/>} />
+          <Route exact path="/" render={() => <MyTasks />} />
+          <Route exact path="/createtask" render={() => <TaskCreateForm/>} />
           <Route
             exact
             path="/mycategories"
